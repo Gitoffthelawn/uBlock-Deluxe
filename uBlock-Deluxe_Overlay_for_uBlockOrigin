@@ -20,6 +20,8 @@ Let me know if you are inspired to donate to a charity.
     v2.8.1
    ----------------------- */
 
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
 /* uBlock Origin extension toolbar button: improve aesthetics when enabled */
 #ublock0-button:not([style='']) .toolbarbutton-badge-container { filter: hue-rotate(92deg) brightness(340%) !important; }
 #ublock0-button:not([style='']) .toolbarbutton-badge { background-color: #222222 !important; }
