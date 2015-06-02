@@ -13,10 +13,15 @@ If you find this project helpful, and you would like to make a donation, you can
 
 
 Instructions:
+
 Copy userChrome.css and userContent.css into the 'chrome' folder in your Firefox profile folder.
+
 If the 'chrome' folder does not exist, simply create one first.
 
+
 Note that the profile folder is not the same as the application folder.
+
 To find your profile folder, enter 'about:support' into the Firefox location bar, and then click on the 'Show Folder' button in the 'Profile Folder' line.
+
 
 Enjoy!
