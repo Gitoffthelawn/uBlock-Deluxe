@@ -1,0 +1,177 @@
+/*
+uBlock Deluxe - Enhanced UI CSS overlay for uBlock Origin
+
+https://github.com/Gitoffthelawn/uBlock-Deluxe
+
+Designed for Mozilla Firefox
+
+Copyright (c) 2015 Gitoffthelawn. All rights reserved.
+No warranties expressed or implied.  Used at your own risk.
+
+If you are interested in this using this code, just ask by creating an issue on Github in this repository.
+I simply would like to know if anyone is using it and if anyone appreciates it.
+
+If you find this project helpful, and you would like to make a donation, you can pick a charity or ask me to pick one. 
+I'm not accepting any money myself, but if my work helps any charities, that would make me happy. 
+Let me know if you are inspired to donate to a charity.
+*/
+
+/* ------------------------
+    uBlock Origin: CONTENT
+    v2.8.1
+   ------------------------ */
+
+/* uBlock Origin extension toolbar button: improve aesthetics when enabled */
+#ublock0-button:not([style='']) .toolbarbutton-badge-container { filter: hue-rotate(92deg) brightness(340%) !important; }
+#ublock0-button:not([style='']) .toolbarbutton-badge { background-color: #222222 !important; }
+#ublock0-button:not([style='']) .toolbarbutton-badge:after { font-family: Tahoma !important; font-weight: normal !important; }
+
+/* uBlock Origin extension popup: improve usability and aesthetics */
+@-moz-document url("chrome://ublock0/content/popup.html") {
+/* extension name in UI: add string */
+#appname::after { content: ' Deluxe!'; }
+/* left pane of popup: allow more items to be displayed */
+#panes > DIV { height: auto !important; max-height: 900px !important; }
+/* 'All' item in left pane: differentiate from other items */
+#firewallContainer > DIV:first-of-type > SPAN:first-of-type {
+   background-color: darkgray !important; color: white !important;
+   font-size: 88% !important; font-style: normal !important; font-weight: bold !important;text-transform: uppercase !important; }
+/* expander to left of 'All' item in left column: enhance appearace */
+  #firewallContainer > DIV:first-of-type > SPAN:first-of-type::before { color: black !important; font-weight: 800 !important; }
+/* rows in left pane that are common for all URLs: differentiate from other items */
+#firewallContainer > DIV:-moz-any(
+  :nth-of-type(2), :nth-of-type(3), :nth-of-type(4), :nth-of-type(5), :nth-of-type(6), :nth-of-type(7)) > SPAN:first-of-type {
+      background-color: lightcyan !important; font-style: italic !important; }
+/* rows in left pane that list hosts and domains: color entire row with green/yellow/red instead of only left edge */
+#firewallContainer > div.allowed > span:nth-of-type(1):before,
+   #firewallContainer > div.blocked > span:nth-of-type(1):before,
+   #firewallContainer.minimized > div.isDomain.totalAllowed > span:nth-of-type(1):before,
+   #firewallContainer.minimized > div.isDomain.totalBlocked > span:nth-of-type(1):before {
+      opacity: 0.2 !important; width: 100% !important; }
+/* site toggle switch in right pane: reduce size */
+#switch > .fa { font-size: 36px !important; }
+/* section headers in right pane: differentiate from items if left pane */
+H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
+/* values for 'requests blocked' and 'domains connected':  make sizes consistent */
+#page-blocked, #popupHitDomainCount { font-size: 16pt !important; }
+/* 'since installed' header: decrease size */
+.statName:nth-of-type(4) { font-size: 80% !important; }
+/* value for 'since installed': decrease size */
+#total-blocked { font-size: 90% !important; }
+/* tool icons in bottom of right pane: differentiate from section headers */
+#extraTools { margin-top: 18px !important; border: 1px solid rgb(68, 68, 68) !important; background-color: inherit !important;  }
+}
+
+/* uBlock Origin extension dashboard (in FF tab): improve aesthetics */
+@-moz-document url("chrome://ublock0/content/dashboard.html") {
+.tabButton { font-size: 85% !important; color: blue !important;  }
+}
+
+/* uBlock Origin extension dashboard (in FF tab) 'Settings' tab: improve usability */
+@-moz-document url("chrome://ublock0/content/settings.html") {
+/* horizontal rule between settings checkboxes and 'Storage used' line: remove */
+#localData > DIV { border-top: none !important; } 
+/* 'Storage used' line: push Backup/Restore section below it further down, make italic */
+#localData > UL > LI:first-of-type { display: block !important; margin-bottom: 60px !important; font-style: italic; }
+/* 'Last backup' line: always display (even if no backup), flow onto single line, remove list style, adjust position */
+#localData > UL > LI:nth-of-type(2) { display: inline-flex !important; position: absolute !important; margin-top: 0px !important; }
+/* 'Last backup' line: display 'None' if no backup */
+#localData > UL > LI:nth-of-type(2)[style="display: none;"]::after { content: "None"; }
+/* 'Last restore' line when not hidden: flow onto single line, remove list style, adjust position */
+#localData > UL > LI:nth-of-type(3):not([style="display: none;"]) {
+   display: inline-flex !important;  position: absolute !important; margin-top: 22px !important; }
+/* 'Last backup' and 'Last restore' lines: flow contents nicely, remove list style, adjust position */
+#localData > UL > LI:-moz-any(:nth-of-type(2), :nth-of-type(3)) > UL > LI {
+   display: flex !important; position: relative !important; margin-top: 0px !important;   }
+/* create backup/restore box using DIV that contains Backup and Restore buttons */
+#localData + DIV {  display: inline-flex !important; height: 8.1em !important; min-width: 24em !important;
+   margin-top: -80px !important; border: 1px solid black !important; padding: 10px !important; }
+/* Backup and Restore buttons: adjust vertical position, hide old strings */
+#export, #import { position: absolute !important; margin-top: 76px !important; font-size: 0px !important; }
+/* Backup and Restore buttons: adjust horizontal positions */
+#export { margin-left: 2px !important; }
+#import { margin-left: 98px !important; }
+/* Reset button: adjust position, hide string */
+#reset { margin-top: 140px !important; margin-left: 350px !important; font-size: 0px !important; }
+/* Backup, Restore, and Reset buttons: restore sizes since previously setting font-size to 0 to hide old strings */
+:-moz-any(#export, #import, #reset)::before { font-size: 14px !important; line-height: 180% !important; padding: 10px !important; }
+/* Backup, Restore, and Reset buttons: improve strings */
+#export::before { content: "Backup..."; }
+#import::before { content: "Restore..."; }
+#reset::before { content: "Reset..."; }
+}
+
+/* uBlock Origin extension dashboard (in FF tab) '3rd-party filters' tab: improve usability */
+@-moz-document url("chrome://ublock0/content/3p-filters.html") {
+/* number of filters installed: make more prominent */
+#listsOfBlockedHostsPrompt { margin-top: 17px !important; font-weight: bold !important; }
+/* filter groups: increase space above each group to enhance clarity */
+.groupEntry { margin-top: 10px !important; }
+/* filter groups enabled counters: make more prominent */
+.geCount { opacity: 1 !important; color: #00E000 !important; }
+/* 'Apply changes' button: increase width */
+#buttonApply { min-width: 300px; }
+/* 'Apply changes' button: add prominent glow when a change has been made (switching dashboard tabs without applying loses changes) */
+#buttonApply:not([disabled]) { filter: drop-shadow(0px 0px 8px green); color: green !important;  }
+}
+
+/* uBlock Origin extension dashboard (in FF tab) 'My filters' tab: improve usability */
+@-moz-document url("chrome://ublock0/content/1p-filters.html") {
+/* 'Apply changes' button: increase width */
+#userFiltersApply { min-width: 300px; }
+/* 'Apply changes' button: add prominent glow when a change has been made (switching dashboard tabs without applying loses changes) */
+#userFiltersApply:not([disabled]) { filter: drop-shadow(0px 0px 8px green); color: green !important;  }
+/* set HTML and BODY heights to entire viewport so child objects will have a reference height to use percentages */
+HTML, BODY { height: 100%; }
+/* BODY: remove bottom padding to allow more room for data */
+BODY { padding-bottom: 0px !important; }
+/* instructions line: change empty space above instructions line from margin to padding
+      to work around FF bug that causes vertical scrollbar to display */
+BODY > P:first-child { margin-top: 0px !important; padding-top: 7px !important;}
+/* increase height of filters textarea so more filters can be displayed (requires HTML and BODY to have a defined height) */
+.userFilters { height: calc(100% - 28.8ex) !important; }
+/* bottom button row: remove bottom margin to allow more room for data above */
+.userFilters + P { margin-bottom: 0px !important; }
+}
+
+/* uBlock Origin extension dashboard (in FF tab) 'My rules' tab: improve usability */
+@-moz-document url("chrome://ublock0/content/dyna-rules.html") {
+/* description line: remove (include meaningful text in headings below) */
+BODY > P:first-of-type { display: none !important; }
+/* pane headings: adjust spacing, hide old strins */
+DIV H2 { margin-bottom: 2px !important; font-size: 0 !important; }
+/* pane headings: restore sizes since previously setting font-size to 0 to hide old strings */
+DIV H2::before { font-size: large !important; }
+/* pane headings: improve strings */
+DIV.left H2::before { content: "Permanent dynamic rules"; }
+DIV.right H2::before { content: "Temporary dynamic rules"; }
+/* Export and Import buttons: hide old strings */
+#exportButton, #importButton { font-size: 0px !important; }
+/* Export and Import buttons: restore sizes since previously setting font-size to 0 to hide old strings */
+:-moz-any(#exportButton, #importButton)::before { font-size: 14px !important; line-height: 180% !important; padding: 10px !important; }
+/* Backup and Restore buttons: improve strings */
+#exportButton::before { content: "Export..."; }
+#importButton::before { content: "Import..."; }
+}
+
+/* uBlock Origin extension dashboard (in FF tab) 'Whitelist' tab: improve usability */
+@-moz-document url("chrome://ublock0/content/whitelist.html") {
+/* 'Apply changes' button: increase width */
+#whitelistApply { min-width: 300px; }
+/* 'Apply changes' button: add prominent glow when a change has been made (switching dashboard tabs without applying loses changes) */
+#whitelistApply:not([disabled]) { filter: drop-shadow(0px 0px 8px green); color: green !important;  }
+/* 'Import and append' and 'Export' buttons: hide old strings */
+#importWhitelistFromFile, #exportWhitelistToFile { font-size: 0px !important; }
+/* 'Import and append' and 'Export' buttons: restore sizes since previously setting font-size to 0 to hide old strings */
+:-moz-any(#importWhitelistFromFile, #exportWhitelistToFile)::before {
+   font-size: 14px !important; line-height: 180% !important; padding: 10px !important; }
+/* 'Import and append' and 'Export' buttons: improve strings */
+#importWhitelistFromFile::before { content: "Import and append..."; }
+#exportWhitelistToFile::before { content: "Export..."; }
+}
+
+/* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker */
+@-moz-document url("chrome://ublock0/content/about.html") {
+/* extension name and version line: add italicized Deluxe marker with Enhanced UI version number */
+#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v2.8.1)" }
+}
