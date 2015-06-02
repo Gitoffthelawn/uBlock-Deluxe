@@ -1,5 +1,7 @@
 # uBlock-Deluxe
-Enhanced UI CSS overlay for uBlock and uBlock Origin
+Enhanced UI CSS overlay for uBlock Origin
+
+(If people express interest, regular uBlock support may come later.)
 
 Designed for Mozilla Firefox
 
