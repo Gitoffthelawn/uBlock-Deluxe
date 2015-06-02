@@ -1,0 +1,29 @@
+/*
+uBlock Deluxe - Enhanced UI CSS overlay for uBlock Origin
+
+https://github.com/Gitoffthelawn/uBlock-Deluxe
+
+Designed for Mozilla Firefox
+
+Copyright (c) 2015 Gitoffthelawn. All rights reserved.
+No warranties expressed or implied.  Used at your own risk.
+
+If you are interested in this using this code, just ask by creating an issue on Github in this repository.
+I simply would like to know if anyone is using it and if anyone appreciates it.
+
+If you find this project helpful, and you would like to make a donation, you can pick a charity or ask me to pick one. 
+I'm not accepting any money myself, but if my work helps any charities, that would make me happy. 
+Let me know if you are inspired to donate to a charity.
+*/
+
+/* -----------------------
+    uBlock Origin: CHROME
+    v2.8.1
+   ----------------------- */
+
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+/* uBlock Origin extension toolbar button: improve aesthetics when enabled */
+#ublock0-button:not([style='']) .toolbarbutton-badge-container { filter: hue-rotate(92deg) brightness(340%) !important; }
+#ublock0-button:not([style='']) .toolbarbutton-badge { background-color: #222222 !important; }
+#ublock0-button:not([style='']) .toolbarbutton-badge:after { font-family: Tahoma !important; font-weight: normal !important; }
