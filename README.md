@@ -4,6 +4,7 @@ Enhanced UI CSS overlay for uBlock and uBlock Origin
 Designed for Mozilla Firefox
 
 Copyright (c) 2015 Gitoffthelawn.  All rights reserved.
+No warranties expressed or implied.  Used at your own risk.
 
 If you are interested in this using this code, just ask by creating an issue on Github in this repository.
 I simply would like to know if anyone is using it and if anyone appreciates it.
