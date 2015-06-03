@@ -18,7 +18,7 @@ Let me know if you are inspired to donate to a charity.
 
 /* ------------------------
     uBlock Origin: CONTENT
-    v2.8.1
+    v2.9.0
    ------------------------ */
 
 /* uBlock Origin extension toolbar button: improve aesthetics when enabled */
@@ -174,4 +174,26 @@ DIV.right H2::before { content: "Temporary dynamic rules"; }
 @-moz-document url("chrome://ublock0/content/about.html") {
 /* extension name and version line: add italicized Deluxe marker with Enhanced UI version number */
 #aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v2.8.1)" }
+}
+
+/* uBlock Origin extension request logger (in FF tab): improve usability, improve accessibility for persons with limited vision */
+@-moz-document url("chrome://ublock0/content/logger-ui.html") {
+/* page selector: increase width, add ellipsis for long strings */
+#pageSelector { min-width: 35.7em !important; text-overflow: ellipsis !important; }
+/* lower toolbar: move closer to upper toolbar */
+#toolbar > DIV:nth-of-type(2) { margin-top: -2px !important; }
+/* filter toggle button: move to right */
+#filterButton { margin-left: 15px !important; }
+/* filter input field: dim when filter disabled */
+#filterInput { opacity: 0.3 !important; }
+BODY.f #filterButton + #filterInput { opacity: 1 !important; }
+/* filter and maximum log entries input field: change focus background color to be different from anything in log table */
+INPUT:focus { -moz-appearance: none !important; background-color: hsla(180, 90%, 60%, 0.2) !important; }
+/* maximum log entries input field: move to right, make wider */
+#maxEntries { margin-left: 31px !important; min-width: 10em !important; }
+/* maximum log entries input field: add descriptive text (::before does not work on INPUT) */
+#maxEntries > DIV::after { content: " entries maximum"; }
+/* log table: ensure a discernible font (lowercase L and capital I look different) if available,
+   modify font size to use a percentage to improve accessibility for persons with limited vision */
+#content { font-family: Trebuchet MS, Sans-Serif !important; font-size: 90% !important; }
 }
