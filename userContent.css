@@ -18,7 +18,7 @@ Let me know if you are inspired to donate to a charity.
 
 /* ------------------------
     uBlock Origin: CONTENT
-    v2.9.0
+    v2.9.1
    ------------------------ */
 
 /* uBlock Origin extension toolbar button: improve aesthetics when enabled */
@@ -195,5 +195,5 @@ INPUT:focus { -moz-appearance: none !important; background-color: hsla(180, 90%,
 #maxEntries > DIV::after { content: " entries maximum"; }
 /* log table: ensure a discernible font (lowercase L and capital I look different) if available,
    modify font size to use a percentage to improve accessibility for persons with limited vision */
-#content { font-family: Trebuchet MS, Sans-Serif !important; font-size: 90% !important; }
+#content { font-family: "Trebuchet MS", sans-serif !important; font-size: 90% !important; }
 }
