@@ -6,7 +6,6 @@ https://github.com/Gitoffthelawn/uBlock-Deluxe
 Designed for Mozilla Firefox
 
 Copyright (c) 2015 Gitoffthelawn. All rights reserved.
-
 No warranties expressed or implied.  Use at your own risk.
 
 If you are interested in this using this code, just ask by creating an issue on Github in this repository.
@@ -19,7 +18,7 @@ Let me know if you are inspired to donate to a charity.
 
 /* ------------------------
     uBlock Origin: CONTENT
-    v3.0.1
+    v3.0.2
    ------------------------ */
 
 /* uBlock Origin extension popup: improve usability and aesthetics */
@@ -181,7 +180,7 @@ DIV.right H2::before { content: "Temporary dynamic rules"; }
 /* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker */
 @-moz-document url("chrome://ublock0/content/about.html") {
 /* extension name and version line: add italicized Deluxe marker with Enhanced UI version number */
-#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.0.0)" }
+#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.0.2)" }
 }
 
 /* uBlock Origin extension request logger (in FF tab): improve usability, improve accessibility for persons with limited vision */
