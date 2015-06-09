@@ -1,30 +1,7 @@
-/*
-uBlock Deluxe - Enhanced UI CSS overlay for uBlock Origin
-
-https://github.com/Gitoffthelawn/uBlock-Deluxe
-
-Designed for Mozilla Firefox
-
-Copyright (c) 2015 Gitoffthelawn. All rights reserved.
-No warranties expressed or implied.  Used at your own risk.
-
-If you are interested in this using this code, just ask by creating an issue on Github in this repository.
-I simply would like to know if anyone is using it and if anyone appreciates it.
-
-If you find this project helpful, and you would like to make a donation, you can pick a charity or ask me to pick one. 
-I'm not accepting any money myself, but if my work helps any charities, that would make me happy. 
-Let me know if you are inspired to donate to a charity.
-*/
-
 /* ------------------------
     uBlock Origin: CONTENT
-    v2.9.1
+    v3.0.0
    ------------------------ */
-
-/* uBlock Origin extension toolbar button: improve aesthetics when enabled */
-#ublock0-button:not([style='']) .toolbarbutton-badge-container { filter: hue-rotate(92deg) brightness(340%) !important; }
-#ublock0-button:not([style='']) .toolbarbutton-badge { background-color: #222222 !important; }
-#ublock0-button:not([style='']) .toolbarbutton-badge:after { font-family: Tahoma !important; font-weight: normal !important; }
 
 /* uBlock Origin extension popup: improve usability and aesthetics */
 @-moz-document url("chrome://ublock0/content/popup.html") {
@@ -48,18 +25,30 @@ Let me know if you are inspired to donate to a charity.
    #firewallContainer.minimized > div.isDomain.totalAllowed > span:nth-of-type(1):before,
    #firewallContainer.minimized > div.isDomain.totalBlocked > span:nth-of-type(1):before {
       opacity: 0.2 !important; width: 100% !important; }
+/* expanded domains: add down-chevron after domain name */
+#firewallContainer:not(.minimized) .isDomain:-moz-any(.totalBlocked, .totalAllowed) > SPAN:first-of-type::after {
+   font-family: "FontAwesome" !important; content: " "; }  
+/* domains, subdomains, and quantity allowed/blocked items: color the text according whether allowed, fully blocked, or partially blocked */
+.isDomain.totalBlocked > SPAN { color: #990000 !important; }
+.isDomain.totalAllowed > SPAN { color: #009900 !important; }
+.isDomain.totalAllowed.totalBlocked > SPAN { color: #887800 !important; }
+.isSubDomain.blocked > SPAN { color: #990000 !important; }
+.isSubDomain.allowed > SPAN { color: #009900 !important; }
 /* site toggle switch in right pane: reduce size */
 #switch > .fa { font-size: 36px !important; }
 /* section headers in right pane: differentiate from items if left pane */
 H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
+/* tool icons for element picker and network request log: add more space to make easier to click */
+.tool { padding-left: 2px !important;  padding-right: 2px !important; }
 /* values for 'requests blocked' and 'domains connected':  make sizes consistent */
 #page-blocked, #popupHitDomainCount { font-size: 16pt !important; }
 /* 'since installed' header: decrease size */
 .statName:nth-of-type(4) { font-size: 80% !important; }
 /* value for 'since installed': decrease size */
 #total-blocked { font-size: 90% !important; }
-/* tool icons in bottom of right pane: differentiate from section headers */
-#extraTools { margin-top: 18px !important; border: 1px solid rgb(68, 68, 68) !important; background-color: inherit !important;  }
+/* tool icons in bottom of right pane: improve spacing, differentiate from section headers */
+.hnSwitch { padding-bottom: 2px !important; }
+#extraTools { margin-top: 16px !important; border: 1px solid rgb(68, 68, 68) !important; background-color: inherit !important;  }
 }
 
 /* uBlock Origin extension dashboard (in FF tab): improve aesthetics */
@@ -173,7 +162,7 @@ DIV.right H2::before { content: "Temporary dynamic rules"; }
 /* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker */
 @-moz-document url("chrome://ublock0/content/about.html") {
 /* extension name and version line: add italicized Deluxe marker with Enhanced UI version number */
-#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v2.8.1)" }
+#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.0.0)" }
 }
 
 /* uBlock Origin extension request logger (in FF tab): improve usability, improve accessibility for persons with limited vision */
