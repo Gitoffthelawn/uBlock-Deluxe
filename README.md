@@ -3,6 +3,8 @@ Enhanced UI CSS overlay for uBlock Origin
 
 (If people express interest, regular uBlock support will come later.)
 
+Goals: Improved usability and accessibility
+
 Designed for Mozilla Firefox
 
 Copyright (c) 2015 Gitoffthelawn.  All rights reserved.  
