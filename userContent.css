@@ -18,7 +18,7 @@ Let me know if you are inspired to donate to a charity.
 
 /* ------------------------
     uBlock Origin: CONTENT
-    v3.0.5
+    v3.0.8
    ------------------------ */
 
 /* uBlock Origin extension popup: improve usability and aesthetics */
@@ -49,9 +49,10 @@ Let me know if you are inspired to donate to a charity.
 /* domains, subdomains, and quantity allowed/blocked items: color the text according whether allowed, fully blocked, or partially blocked */
 .isDomain.totalBlocked > SPAN { color: #990000 !important; }
 .isDomain.totalAllowed > SPAN { color: #009900 !important; }
-.isDomain.totalAllowed.totalBlocked > SPAN { color: #887800 !important; }
+.isDomain.totalAllowed.totalBlocked:not(.blocked):not(.allowed) > SPAN { color: #887800 !important; }
 .isSubDomain.blocked > SPAN { color: #990000 !important; }
 .isSubDomain.allowed > SPAN { color: #009900 !important; }
+.isSubDomain.allowed.blocked > SPAN { color: #786800 !important; }
 /* site toggle switch in right pane: reduce size */
 #switch > .fa { font-size: 36px !important; }
 /* section headers in right pane: differentiate from items if left pane */
@@ -180,7 +181,7 @@ DIV.right H2::before { content: "Temporary dynamic rules"; }
 /* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker */
 @-moz-document url("chrome://ublock0/content/about.html") {
 /* extension name and version line: add italicized Deluxe marker with Enhanced UI version number */
-#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.0.5)" }
+#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.0.8)" }
 }
 
 /* uBlock Origin extension request logger (in FF tab): improve usability, improve accessibility for persons with limited vision */
