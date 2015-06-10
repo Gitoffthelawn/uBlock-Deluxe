@@ -18,7 +18,7 @@ Let me know if you are inspired to donate to a charity.
 
 /* ------------------------
     uBlock Origin: CONTENT
-    v3.0.8
+    v3.0.9
    ------------------------ */
 
 /* uBlock Origin extension popup: improve usability and aesthetics */
@@ -45,11 +45,11 @@ Let me know if you are inspired to donate to a charity.
       opacity: 0.2 !important; width: 100% !important; }
 /* expanded domains: add down-triangle after domain name */
 #firewallContainer:not(.minimized) .isDomain:-moz-any(.totalBlocked, .totalAllowed):not(:-moz-any(.blocked, .allowed)) > SPAN:first-of-type::after {
-   font-size: 80% !important; content: " \25BC"; }  
+   font-size: 80% !important; content: " \25BC"; }  
 /* domains, subdomains, and quantity allowed/blocked items: color the text according whether allowed, fully blocked, or partially blocked */
 .isDomain.totalBlocked > SPAN { color: #990000 !important; }
 .isDomain.totalAllowed > SPAN { color: #009900 !important; }
-.isDomain.totalAllowed.totalBlocked:not(.blocked):not(.allowed) > SPAN { color: #887800 !important; }
+.isDomain.totalAllowed.totalBlocked:-moz-any(.blocked.allowed, :not(.blocked):not(.allowed)) > SPAN { color: #887800 !important; }
 .isSubDomain.blocked > SPAN { color: #990000 !important; }
 .isSubDomain.allowed > SPAN { color: #009900 !important; }
 .isSubDomain.allowed.blocked > SPAN { color: #786800 !important; }
@@ -181,7 +181,7 @@ DIV.right H2::before { content: "Temporary dynamic rules"; }
 /* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker */
 @-moz-document url("chrome://ublock0/content/about.html") {
 /* extension name and version line: add italicized Deluxe marker with Enhanced UI version number */
-#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.0.8)" }
+#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.0.9)" }
 }
 
 /* uBlock Origin extension request logger (in FF tab): improve usability, improve accessibility for persons with limited vision */
