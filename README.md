@@ -1,7 +1,7 @@
 # uBlock-Deluxe
 Enhanced UI CSS overlay for uBlock Origin
 
-(If people express interest, regular uBlock support will come later.)
+*(If people express interest, regular uBlock support will come later.)*
 
 Goals: Improved usability and accessibility
 
