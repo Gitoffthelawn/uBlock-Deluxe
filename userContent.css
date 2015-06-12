@@ -18,7 +18,7 @@ Let me know if you are inspired to donate to a charity.
 
 /* ------------------------
     uBlock Origin: CONTENT
-    v3.0.9
+    v3.7.0
    ------------------------ */
 
 /* uBlock Origin extension popup: improve usability and aesthetics */
@@ -38,10 +38,10 @@ Let me know if you are inspired to donate to a charity.
   :nth-of-type(2), :nth-of-type(3), :nth-of-type(4), :nth-of-type(5), :nth-of-type(6), :nth-of-type(7)) > SPAN:first-of-type {
       background-color: lightcyan !important; font-style: italic !important; }
 /* rows in left pane that list hosts and domains: color entire row with green/yellow/red instead of only left edge */
-#firewallContainer > div.allowed > span:nth-of-type(1):before,
-   #firewallContainer > div.blocked > span:nth-of-type(1):before,
-   #firewallContainer.minimized > div.isDomain.totalAllowed > span:nth-of-type(1):before,
-   #firewallContainer.minimized > div.isDomain.totalBlocked > span:nth-of-type(1):before {
+#firewallContainer > div.allowed > span:first-of-type::before,
+   #firewallContainer > div.blocked > span:first-of-type::before,
+   #firewallContainer.minimized > div.isDomain.totalAllowed > span:first-of-type::before,
+   #firewallContainer.minimized > div.isDomain.totalBlocked > span:first-of-type::before {
       opacity: 0.2 !important; width: 100% !important; }
 /* expanded domains: add down-triangle after domain name */
 #firewallContainer:not(.minimized) .isDomain:-moz-any(.totalBlocked, .totalAllowed):not(:-moz-any(.blocked, .allowed)) > SPAN:first-of-type::after {
@@ -55,10 +55,14 @@ Let me know if you are inspired to donate to a charity.
 .isSubDomain.allowed.blocked > SPAN { color: #786800 !important; }
 /* site toggle switch in right pane: reduce size */
 #switch > .fa { font-size: 36px !important; }
+/* site toggle switch in right pane on hover: increase opacity, apply glow */
+#switch > .fa:hover { opacity: 1 !important; text-shadow: 0px 0px 2px cyan !important; }
 /* section headers in right pane: differentiate from items if left pane */
 H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
 /* tool icons for element picker and network request log: add more space to make easier to click */
 .tool { padding-left: 2px !important;  padding-right: 2px !important; }
+/* tool icons for element picker and network request log on hover: change color to indicate these are actions */
+.tool:hover { color: #0000FF !important; }
 /* values for 'requests blocked' and 'domains connected':  make sizes consistent */
 #page-blocked, #popupHitDomainCount { font-size: 16pt !important; }
 /* 'since installed' header: decrease size */
@@ -67,16 +71,48 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
 #total-blocked { font-size: 90% !important; }
 /* tool icons in bottom of right pane: improve spacing, differentiate from section headers */
 .hnSwitch { padding-bottom: 2px !important; }
-#extraTools { margin-top: 16px !important; border: 1px solid rgb(68, 68, 68) !important; background-color: inherit !important;  }
+#extraTools { margin-top: 16px !important; border: 1px solid rgb(68, 68, 68) !important; background-color: inherit !important; }
+/* tool icons in bottom of right pane on hover: intensify color to make UI more crisp */
+#extraTools > span:hover { color: black !important; }
 }
 
-/* uBlock Origin extension dashboard (in FF tab): improve aesthetics */
+/* uBlock Origin extension dashboard (in FF tab): improve aesthetics, add Deluxe tagline */
 @-moz-document url("chrome://ublock0/content/dashboard.html") {
-.tabButton { font-size: 85% !important; color: blue !important;  }
+/* title: reduce size, add italics, add Deluxe tagline */
+#dashboard-nav-widgets > SPAN { font-size: 95% !important; font-style: italic !important; }
+#dashboard-nav-widgets > SPAN::after { content: " Deluxe"; }
+/* tabs: change font size, improve tab names, replace 'About' tab with question mark icon */
+#dashboard-nav-widgets > A { font-size: 0px !important; }
+#dashboard-nav-widgets > A:first-of-type::before { font-size: medium !important; content: "Settings"; }
+#dashboard-nav-widgets > A:nth-of-type(2)::before { font-size: medium !important; content: "Filter Lists"; }
+#dashboard-nav-widgets > A:nth-of-type(3)::before { font-size: medium !important; content: "My Filters"; }
+#dashboard-nav-widgets > A:nth-of-type(4)::before { font-size: medium !important; content: "My Rules"; }
+#dashboard-nav-widgets > A:nth-of-type(5)::before { font-size: medium !important; content: "My Whitelist"; }
+#dashboard-nav-widgets > A:nth-of-type(6)::before {
+      font-family: "FontAwesome" !important; font-size: medium !important; content: "\00A0\F059\00A0"; }
+/* tabs: soften corners, change text color */
+.tabButton { border-top-left-radius: 10px !important; border-top-right-radius: 10px !important; color: blue !important; }
+/* tabs on hover: change background color */
+.tabButton:not(.selected):hover { background-color: rgb(247, 247, 247) !important; }
 }
 
 /* uBlock Origin extension dashboard (in FF tab) 'Settings' tab: improve usability */
 @-moz-document url("chrome://ublock0/content/settings.html") {
+/* 'Show the number of blocked requests on the icon' option: replace with more appropriate string */
+#icon-badge + LABEL { visibility: hidden !important; }
+#icon-badge + LABEL::before { visibility: visible !important; content: "Display number of blocked requests on toolbar icon"; }
+/* 'Make use of context menu where appropriate' option: replace with more appropriate string */
+#context-menu-enabled + LABEL { visibility: hidden !important; }
+#context-menu-enabled + LABEL::before { visibility: visible !important; content: "Add items to context menu"; }
+/* 'I am an advanced user' option: replace with more appropriate string */
+#advanced-user-enabled + LABEL { visibility: hidden !important; }
+#advanced-user-enabled + LABEL::before { visibility: visible !important; content: "Advanced mode"; }
+/* 'Required Reading' link: replace with more appropriate, less demanding, and more universal question mark icon */
+#advanced-user-enabled + LABEL > A::before {
+   visibility: visible !important; opacity: 0.3; margin-left: -9.2em !important;
+   font-family: "FontAwesome" !important; font-size: 110% !important; content: "\F059"; }
+/* new question mark icon on hover: emphasize */
+#advanced-user-enabled + LABEL > A:hover::before { opacity: 1.0 !important; }
 /* horizontal rule between settings checkboxes and 'Storage used' line: remove */
 #localData > DIV { border-top: none !important; } 
 /* 'Storage used' line: push Backup/Restore section below it further down, make italic */
@@ -102,33 +138,63 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
 /* Reset button: adjust position, hide string */
 #reset { margin-top: 140px !important; margin-left: 350px !important; font-size: 0px !important; }
 /* Backup, Restore, and Reset buttons: restore sizes since previously setting font-size to 0 to hide old strings */
-:-moz-any(#export, #import, #reset)::before { font-size: 14px !important; line-height: 180% !important; padding: 10px !important; }
+:-moz-any(#export, #import, #reset)::before { font-size: small !important; line-height: 180% !important; padding: 10px !important; }
 /* Backup, Restore, and Reset buttons: improve strings */
 #export::before { content: "Backup..."; }
 #import::before { content: "Restore..."; }
 #reset::before { content: "Reset..."; }
 }
 
-/* uBlock Origin extension dashboard (in FF tab) '3rd-party filters' tab: improve usability */
+/* uBlock Origin extension dashboard (in FF tab) 'Filters List' (previously '3rd-party filters') tab: improve usability */
 @-moz-document url("chrome://ublock0/content/3p-filters.html") {
+/* 'Auto-update filter lists' option: remove period at end of string */
+#autoUpdate + LABEL { visibility: hidden !important; }
+#autoUpdate + LABEL::before { visibility: visible !important; margin-right: -9em !important; content: "Auto-update filter lists"; }
+/* 'Update now' button: add space between it and 'Purge all caches' button */
+#buttonUpdate { margin-right: 8px !important; }
+/* 'Parse and enforce cosmetic filters' option: add critical information, remove period at end of string */
+#parseCosmeticFilters + LABEL { visibility: hidden !important; }
+#parseCosmeticFilters + LABEL::before {
+   visibility: visible !important; margin-right: -15.5em !important; content: "Parse and enforce all cosmetic filters (including My Filters)"; }
 /* number of filters installed: make more prominent */
 #listsOfBlockedHostsPrompt { margin-top: 17px !important; font-weight: bold !important; }
 /* filter groups: increase space above each group to enhance clarity */
 .groupEntry { margin-top: 10px !important; }
 /* filter groups enabled counters: make more prominent */
-.geCount { opacity: 1 !important; color: #00E000 !important; }
+.geCount { opacity: 1 !important; color: #00C000 !important; }
+/* filters downloaded via http: change 'http' indicators to not look like clickable buttons */
+span.unsecure { background-color: transparent !important; border: none !important; }
+span.unsecure::before { content: "(via "; }
+span.unsecure::after { content: ")"; }
+/* 'purge cache' buttons: make look more like buttons */
+span.purge { border-color: rgb(150, 150, 150) !important; }
 /* 'Apply changes' button: increase width */
 #buttonApply { min-width: 300px; }
 /* 'Apply changes' button: add prominent glow when a change has been made (switching dashboard tabs without applying loses changes) */
-#buttonApply:not([disabled]) { filter: drop-shadow(0px 0px 8px green); color: green !important;  }
+#buttonApply:not([disabled]) { filter: drop-shadow(0px 0px 8px green); color: #00B000 !important; }
+/* instructions for adding custom lists: improve */
+#externalListsDiv > P:first-of-type { font-size: 0px !important; }
+#externalListsDiv > P:first-of-type::before {
+   font-size: small !important;
+   content: "Add custom URLs below.\00A0\00A0 One URL per line.\00A0\00A0 Invalid URLs ignored.\00A0\00A0 Prefix comments with '!'."; }
+/* Parse button: improve by changing to an 'Add' button */
+#externalListsApply { font-size: 0px !important; }
+#externalListsApply::before {
+   font-size: small !important;
+   content: "\00A0\00A0\00A0 Add \00A0\00A0\00A0"; }
 }
 
-/* uBlock Origin extension dashboard (in FF tab) 'My filters' tab: improve usability */
+/* uBlock Origin extension dashboard (in FF tab) 'My Filters' tab: improve usability */
 @-moz-document url("chrome://ublock0/content/1p-filters.html") {
+/* heading: simplify and improve */
+BODY > P:first-of-type { visibility: collapse !important; }
+BODY > P:first-of-type::before {
+   visibility: visible !important;
+   content: "Filters can be host names or ABE/ABP-compatible entries.\00A0\00A0 (One entry per line. Prefix comments with '!'.)"; }
 /* 'Apply changes' button: increase width */
 #userFiltersApply { min-width: 300px; }
 /* 'Apply changes' button: add prominent glow when a change has been made (switching dashboard tabs without applying loses changes) */
-#userFiltersApply:not([disabled]) { filter: drop-shadow(0px 0px 8px green); color: green !important;  }
+#userFiltersApply:not([disabled]) { filter: drop-shadow(0px 0px 8px green); color: #00B000 !important;  }
 /* set HTML and BODY heights to entire viewport so child objects will have a reference height to use percentages */
 HTML, BODY { height: 100%; }
 /* BODY: remove bottom padding to allow more room for data */
@@ -142,10 +208,17 @@ BODY > P:first-child { margin-top: 0px !important; padding-top: 7px !important;}
 .userFilters + P { margin-bottom: 0px !important; }
 }
 
-/* uBlock Origin extension dashboard (in FF tab) 'My rules' tab: improve usability */
+/* uBlock Origin extension dashboard (in FF tab) 'My Rules' tab: improve usability */
 @-moz-document url("chrome://ublock0/content/dyna-rules.html") {
 /* description line: remove (include meaningful text in headings below) */
 BODY > P:first-of-type { display: none !important; }
+/* 'full documentation' link: replace with more appropriate, less demanding, and more universal question mark icon */
+BODY > P:nth-of-type(2) > A { font-size: 0px !important; }
+BODY > P:nth-of-type(2) > A::before {
+   opacity: 0.3;  !important;
+   font-family: "FontAwesome" !important; font-size: medium !important; content: "\F059"; }
+/* new question mark icon on hover: emphasize */
+BODY > P:nth-of-type(2) > A:hover::before { opacity: 1.0 !important; }
 /* pane headings: adjust spacing, hide old strins */
 DIV H2 { margin-bottom: 2px !important; font-size: 0 !important; }
 /* pane headings: restore sizes since previously setting font-size to 0 to hide old strings */
@@ -156,23 +229,28 @@ DIV.right H2::before { content: "Temporary dynamic rules"; }
 /* Export and Import buttons: hide old strings */
 #exportButton, #importButton { font-size: 0px !important; }
 /* Export and Import buttons: restore sizes since previously setting font-size to 0 to hide old strings */
-:-moz-any(#exportButton, #importButton)::before { font-size: 14px !important; line-height: 180% !important; padding: 10px !important; }
+:-moz-any(#exportButton, #importButton)::before { font-size: small !important; line-height: 180% !important; padding: 10px !important; }
 /* Backup and Restore buttons: improve strings */
 #exportButton::before { content: "Export..."; }
 #importButton::before { content: "Import..."; }
 }
 
-/* uBlock Origin extension dashboard (in FF tab) 'Whitelist' tab: improve usability */
+/* uBlock Origin extension dashboard (in FF tab) 'My Whitelist' tab: improve usability */
 @-moz-document url("chrome://ublock0/content/whitelist.html") {
+/* heading: simplify and improve */
+BODY > P:first-of-type { visibility: collapse !important; }
+BODY > P:first-of-type::before {
+   visibility: visible !important;
+   content: "Host names for which blocking is disabled.\00A0\00A0 (One entry per line. Invalid host names ignored.)"; }
 /* 'Apply changes' button: increase width */
 #whitelistApply { min-width: 300px; }
 /* 'Apply changes' button: add prominent glow when a change has been made (switching dashboard tabs without applying loses changes) */
-#whitelistApply:not([disabled]) { filter: drop-shadow(0px 0px 8px green); color: green !important;  }
+#whitelistApply:not([disabled]) { filter: drop-shadow(0px 0px 8px green); color: #00B000 !important;  }
 /* 'Import and append' and 'Export' buttons: hide old strings */
 #importWhitelistFromFile, #exportWhitelistToFile { font-size: 0px !important; }
 /* 'Import and append' and 'Export' buttons: restore sizes since previously setting font-size to 0 to hide old strings */
 :-moz-any(#importWhitelistFromFile, #exportWhitelistToFile)::before {
-   font-size: 14px !important; line-height: 180% !important; padding: 10px !important; }
+   font-size: small !important; line-height: 180% !important; padding: 10px !important; }
 /* 'Import and append' and 'Export' buttons: improve strings */
 #importWhitelistFromFile::before { content: "Import and append..."; }
 #exportWhitelistToFile::before { content: "Export..."; }
@@ -181,7 +259,7 @@ DIV.right H2::before { content: "Temporary dynamic rules"; }
 /* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker */
 @-moz-document url("chrome://ublock0/content/about.html") {
 /* extension name and version line: add italicized Deluxe marker with Enhanced UI version number */
-#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.0.9)" }
+#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.7.0)"; }
 }
 
 /* uBlock Origin extension request logger (in FF tab): improve usability, improve accessibility for persons with limited vision */
@@ -204,4 +282,28 @@ INPUT:focus { -moz-appearance: none !important; background-color: hsla(180, 90%,
 /* log table: ensure a discernible font (lowercase L and capital I look different) if available,
    modify font size to use a percentage to improve accessibility for persons with limited vision */
 #content { font-family: "Trebuchet MS", sans-serif !important; font-size: 90% !important; }
+}
+
+/* uBlock Origin extension blocked page notification (in FF tab): improve usability */
+@-moz-document url-prefix("chrome://ublock0/content/document-blocked.html") {
+/* warning icon: reduce size to prevent scrolling on smaller windows and to reduce intensity of notification */
+#warningSign > SPAN { font-size: 160px !important; }
+/* text notification: improve string */
+#warningSign + DIV > P:first-of-type { font-size: 0px !important; }
+#warningSign + DIV > P:first-of-type::after { font-size: large !important; content: "uBlock prevented page from loading:"; }
+/* filter heading: improve string */
+#warningSign + DIV + DIV > P:first-of-type { font-size: 0px !important; }
+#warningSign + DIV + DIV > P:first-of-type::after { font-size: large !important; content: "In response to filter:"; }
+/* close action:
+      increase spacing to improve usability
+      fix erroneous button (action does not necessarily close browser window) */
+#bye { margin-top: 20px !important; font-size: 0px !important; }
+#bye::after { line-height: 180% !important; padding: 10px !important; font-size: large !important; content: "Close Tab"; }
+/* reload after disabling strict blocking action:
+      increase spacing to improve usability
+      change string to indicate actual action taken */
+#proceed { margin-top: 50px !important; }
+#proceed::before { padding-top: 130px !important; content: "Or reload after disabling strict blocking for"; }
+#proceedTemplate > SPAN:first-of-type { display: none !important; }
+#proceed + P { margin-top: 8px !important; }
 }
