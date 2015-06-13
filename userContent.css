@@ -18,7 +18,7 @@ Let me know if you are inspired to donate to a charity.
 
 /* ------------------------
     uBlock Origin: CONTENT
-    v3.7.0
+    v3.8.0
    ------------------------ */
 
 /* uBlock Origin extension popup: improve usability and aesthetics */
@@ -206,6 +206,14 @@ BODY > P:first-child { margin-top: 0px !important; padding-top: 7px !important;}
 .userFilters { height: calc(100% - 28.8ex) !important; }
 /* bottom button row: remove bottom margin to allow more room for data above */
 .userFilters + P { margin-bottom: 0px !important; }
+/* 'Import and append' and 'Export' buttons: hide old strings */
+#importUserFiltersFromFile, #exportUserFiltersToFile { font-size: 0px !important; }
+/* 'Import and append' and 'Export' buttons: restore sizes since previously setting font-size to 0 to hide old strings */
+:-moz-any(#importUserFiltersFromFile, #exportUserFiltersToFile)::before {
+   font-size: small !important; line-height: 180% !important; padding: 10px !important; }
+/* 'Import and append' and 'Export' buttons: improve strings */
+#importUserFiltersFromFile::before { content: "Import and append..."; }
+#exportUserFiltersToFile::before { content: "Export..."; }
 }
 
 /* uBlock Origin extension dashboard (in FF tab) 'My Rules' tab: improve usability */
@@ -259,7 +267,7 @@ BODY > P:first-of-type::before {
 /* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker */
 @-moz-document url("chrome://ublock0/content/about.html") {
 /* extension name and version line: add italicized Deluxe marker with Enhanced UI version number */
-#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.7.0)"; }
+#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.8.0)"; }
 }
 
 /* uBlock Origin extension request logger (in FF tab): improve usability, improve accessibility for persons with limited vision */
