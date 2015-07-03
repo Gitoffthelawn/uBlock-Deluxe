@@ -18,7 +18,7 @@ Let me know if you are inspired to donate to a charity.
 
 /* ------------------------
     uBlock Origin: CONTENT
-    v3.8.0
+    v3.8.5
    ------------------------ */
 
 /* uBlock Origin extension popup: improve usability and aesthetics */
@@ -267,7 +267,7 @@ BODY > P:first-of-type::before {
 /* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker */
 @-moz-document url("chrome://ublock0/content/about.html") {
 /* extension name and version line: add italicized Deluxe marker with Enhanced UI version number */
-#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.8.0)"; }
+#aboutNameVer::after { font-style: italic !important; content: " Deluxe (Enhanced UI v3.8.5)"; }
 }
 
 /* uBlock Origin extension request logger (in FF tab): improve usability, improve accessibility for persons with limited vision */
@@ -290,6 +290,10 @@ INPUT:focus { -moz-appearance: none !important; background-color: hsla(180, 90%,
 /* log table: ensure a discernible font (lowercase L and capital I look different) if available,
    modify font size to use a percentage to improve accessibility for persons with limited vision */
 #content { font-family: "Trebuchet MS", sans-serif !important; font-size: 90% !important; }
+/* log table item-type column: increase width to fix undesired overflow */
+#content table > colgroup > col:nth-of-type(5) { width: 6.2em !important; }
+/* log table URL column of URL delimiter row: improve centering by compensating for width of first two columns, italicize text to enhance differentiation */
+#content tr.maindoc td:last-of-type { overflow: visible !important; padding-right: 8em !important; font-style: italic !important; }
 }
 
 /* uBlock Origin extension blocked page notification (in FF tab): improve usability */
@@ -302,15 +306,19 @@ INPUT:focus { -moz-appearance: none !important; background-color: hsla(180, 90%,
 /* filter heading: improve string */
 #warningSign + DIV + DIV > P:first-of-type { font-size: 0px !important; }
 #warningSign + DIV + DIV > P:first-of-type::after { font-size: large !important; content: "In response to filter:"; }
+/* filter list indicator: italicize, improve string */
+#whyex { font-style: italic !important; }
+#whyex > SPAN:first-of-type { display: none !important; }
+#whyex > SPAN:last-of-type::before { content: "From list: "; }
 /* close action:
       increase spacing to improve usability
       fix erroneous button (action does not necessarily close browser window) */
-#bye { margin-top: 20px !important; font-size: 0px !important; }
+#bye { margin-top: 6px !important; font-size: 0px !important; }
 #bye::after { line-height: 180% !important; padding: 10px !important; font-size: large !important; content: "Close Tab"; }
 /* reload after disabling strict blocking action:
       increase spacing to improve usability
       change string to indicate actual action taken */
-#proceed { margin-top: 50px !important; }
+#proceed { margin-top: 70px !important; }
 #proceed::before { padding-top: 130px !important; content: "Or reload after disabling strict blocking for"; }
 #proceedTemplate > SPAN:first-of-type { display: none !important; }
 #proceed + P { margin-top: 8px !important; }
