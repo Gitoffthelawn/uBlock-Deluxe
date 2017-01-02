@@ -5,47 +5,61 @@ https://github.com/Gitoffthelawn/uBlock-Deluxe
 
 Designed for Mozilla Firefox
 
-Copyright (c) 2015 Gitoffthelawn. All rights reserved.
-No warranties expressed or implied.  Use at your own risk.
+Copyright (c) 2015-2017 Gitoffthelawn. All rights reserved.
+No warranties expressed or implied. Use at your own risk.
 
-If you are interested in this using this code, just ask by creating an issue on Github in this repository.
-I simply would like to know if anyone is using it and if anyone appreciates it.
+If you are interested in this using this code or any of the resultant designs in another project, just ask by creating an issue on GitHub in this repository.
 
-If you find this project helpful, and you would like to make a donation, you can pick a charity or ask me to pick one. 
-I am not accepting any money myself, but if my work helps any charities, that would make me happy. 
+If you find this project helpful and would like to make a donation, you can pick a charity or ask me to pick one.
+I am not accepting any money myself, but if my work helps any charities, that would make me happy.
 Let me know if you are inspired to donate to a charity.
 */
 
 /* ------------------------
     uBlock Origin: CONTENT
-    v4.4.0
+    v5.0.2
    ------------------------ */
 
-/* uBlock Origin extension popup: improve usability and aesthetics */
-@-moz-document url("chrome://ublock0/content/popup.html") {
+@namespace url(http://www.w3.org/1999/xhtml);
+
+
+/* uBlock Origin extension popup: improve usability and aesthetics
+      using 'url-prefix' instead of 'url' to also apply to popup within logger */
+@-moz-document url-prefix("chrome://ublock0/content/popup.html") {
+
 /* --- TOP LINE --- */
+/* top line: increase height */
+#gotoPrefs { padding-top: 6px !important; padding-bottom: 4px !important; }
+/* settings icon: move from left edge to right edge, move up */
+#version + SPAN { right: -32em !important; margin-top: -1px !important; }
 /* extension name in top line: add string */
-#appname::after { content: ' Deluxe!'; }
+#appname::after { content: " Deluxe!"; }
+/* 'Deluxe!' string and settings icon: highlight on hover */
+#gotoPrefs:hover > #appname::after, #gotoPrefs:hover > #version + SPAN {
+   opacity: 1 !important; color: rgb(220, 255, 255) !important; text-shadow: 0 0 2px cyan !important; }
+
 /* --- LEFT PANE --- */
 /* left pane of popup: allow more items to be displayed */
 #panes > DIV { height: auto !important; max-height: 900px !important; }
 /* 'All' item in left pane: differentiate from other items */
 #firewallContainer > DIV:first-of-type > SPAN:first-of-type {
+   margin-left: -1.1em !important;
    background-color: darkgray !important; color: white !important;
    font-size: 88% !important; font-style: normal !important; font-weight: bold !important;
    text-transform: uppercase !important; }
-/* expander to left of 'All' item in left column: enhance appearace */
-#firewallContainer > DIV:first-of-type > SPAN:first-of-type::before { color: black !important; font-weight: 800 !important; }
+/* expander to left of 'All' item in left column: enhance appearance */
+#firewallContainer > DIV:first-of-type > SPAN:first-of-type::before {
+   color: black !important; font-weight: 800 !important; }
 /* rows in left pane common for all URLs: differentiate from other rows */
 #firewallContainer
    > DIV:-moz-any(:nth-of-type(2), :nth-of-type(3), :nth-of-type(4), :nth-of-type(5), :nth-of-type(6), :nth-of-type(7))
    > SPAN:first-of-type {
       background-color: lightcyan !important; font-style: italic !important; }
 /* rows in left pane that list hosts and domains: color entire row with green/yellow/red instead of only left edge */
-#firewallContainer > div.allowed > span:first-of-type::before,
-   #firewallContainer > div.blocked > span:first-of-type::before,
-   #firewallContainer.minimized > div.isDomain.totalAllowed > span:first-of-type::before,
-   #firewallContainer.minimized > div.isDomain.totalBlocked > span:first-of-type::before {
+#firewallContainer > DIV.allowed > SPAN:first-of-type::before,
+   #firewallContainer > DIV.blocked > SPAN:first-of-type::before,
+   #firewallContainer.minimized > DIV.isDomain.totalAllowed > SPAN:first-of-type::before,
+   #firewallContainer.minimized > DIV.isDomain.totalBlocked > SPAN:first-of-type::before {
       opacity: 0.2 !important; width: 100% !important; }
 /* expanded domains: add down-triangle after domain name */
 #firewallContainer:not(.minimized) .isDomain:-moz-any(.totalBlocked, .totalAllowed):not(:-moz-any(.blocked, .allowed))
@@ -60,6 +74,7 @@ Let me know if you are inspired to donate to a charity.
 .isSubDomain.blocked > SPAN { color: #990000 !important; }
 .isSubDomain.allowed > SPAN { color: #009900 !important; }
 .isSubDomain.allowed.blocked > SPAN { color: #786800 !important; }
+
 /* --- RIGHT PANE --- */
 /* new tools area in top of right pane: make spacious */
 #switch { margin-top: 15px !important; margin-bottom: 14px !important; }
@@ -100,18 +115,23 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
 .hnSwitch { padding-bottom: 2px !important; }
 #extraTools {
    margin-top: 16px !important; border: 1px solid rgb(68, 68, 68) !important; background-color: inherit !important; }
-/* extra tools in bottom of right pane: do not change icon color on hover, increase weight of 'X' when enabled */
+/* extra tools in bottom of right pane: do not change icon color on hover, increase weight of 'X' when disabled */
 #extraTools > SPAN { color: rgb(170, 170, 170) !important; }
 #extraTools > SPAN > SPAN:last-of-type { font-weight: bold !important; }
 /* extra tools in bottom of right pane on hover: indicate action by always showing 'X' on hover,
-      provide cue to type of action and indicate hover by applying red shadow to 'X' on hover,
-      apply state-dependent color to 'X' regardless even when hover */
-/* to create 'X' on hover when not enabled, use same code that creates 'X' when enabled, plus add enhancments */
+      provide cue to type of action and indicate hover by applying vibrant shadow to 'X' on hover,
+      apply state-dependent color to 'X' regardless of whether or not hovering */
+/* to create 'X' on hover when not enabled, use same code that creates 'X' when enabled, plus add enhancements */
 #extraTools > SPAN:hover > SPAN:last-of-type {
-   position: absolute; top: 0; left: 0; width: 100%; text-align: center; font-size: 20px; 
+   position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important;
+   text-align: center !important; font-size: 20px !important;
    color: gray !important; text-shadow: 0 0 2px red !important; }
-#extraTools > SPAN:hover > SPAN:last-of-type:after { content: '\2715'; }
-#extraTools > SPAN.on > SPAN:last-of-type { color: #e00 !important; }
+#extraTools > SPAN:hover > SPAN:last-of-type:after { content: "\2715"; }
+#extraTools > SPAN.on > SPAN:last-of-type { color: #E00 !important; }
+/* no-popups extra tool in bottom of right pane: improve icon by using FontAwesome fa-clone character
+      requires FontAwesome v4.4, which is not yet included in uBlock */
+   /* #no-popups { font-size: 0 !important; } */
+   /* #no-popups::after { font-size: 20px; content: "\F24D"; } */
 /* previous extra tools style (only subtle modification) */
    /* toggle icons in bottom of right pane on hover: intensify color to make UI more crisp */
    /* #extraTools > SPAN:hover { color: black !important; } */
@@ -122,8 +142,9 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
    background-color: #FF4 !important; font-size: 38px !important; }
 }
 
+
 /* uBlock Origin extension dashboard (in FF tab): improve aesthetics, add Deluxe tagline */
-@-moz-document url("chrome://ublock0/content/dashboard.html") {
+@-moz-document url-prefix("chrome://ublock0/content/dashboard.html") {
 /* title: reduce size, add italics, add Deluxe tagline */
 #dashboard-nav-widgets > SPAN { font-size: 95% !important; font-style: italic !important; }
 #dashboard-nav-widgets > SPAN::after { content: " Deluxe"; }
@@ -149,6 +170,7 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
 .tabButton:not(.selected):hover { background-color: rgb(247, 247, 247) !important; }
 }
 
+
 /* uBlock Origin extension dashboard (in FF tab) 'Settings' tab: improve usability */
 @-moz-document url("chrome://ublock0/content/settings.html") {
 /* 'Show the number of blocked requests on the icon' option: replace with more appropriate string */
@@ -157,7 +179,7 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
    visibility: visible !important; content: "Display number of blocked requests on toolbar icon"; }
 /* 'Make use of context menu where appropriate' option: replace with more appropriate string */
 #context-menu-enabled + LABEL { visibility: hidden !important; }
-#context-menu-enabled + LABEL::before { visibility: visible !important; content: "Add items to context menu"; }
+#context-menu-enabled + LABEL::before { visibility: visible !important; content: "Add context menu items"; }
 /* 'I am an advanced user' option: replace with more appropriate string */
 #advanced-user-enabled + LABEL { visibility: hidden !important; }
 #advanced-user-enabled + LABEL::before { visibility: visible !important; content: "Advanced mode"; }
@@ -167,9 +189,11 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
    font-family: "FontAwesome" !important; font-size: 110% !important; content: "\F059"; }
 /* new question mark icon on hover: emphasize */
 #advanced-user-enabled + LABEL > A:hover::before { opacity: 1 !important; }
+/* advanced mode settings icon: adjust position */
+#advanced-user-enabled + LABEL + A.info { margin-left: -9.7em !important; padding-bottom: 1px !important; }
 /* 'Privacy' section item information icons: enhance appearance */
-#userSettings a.info { opacity: 0.3 !important; color: rgb(0, 0, 238) !important; }
-#userSettings a.info:hover { opacity: 1 !important; }
+#userSettings A.info { opacity: 0.3 !important; color: rgb(0, 0, 238) !important; }
+#userSettings A.info:hover { opacity: 1 !important; }
 /* horizontal rule between settings checkboxes and 'Storage used' line: remove */
 #localData > DIV { border-top: none !important; } 
 /* 'Storage used' line: push Backup/Restore section below it further down, make italic */
@@ -183,7 +207,7 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
 /* 'Last restore' line when not hidden: flow onto single line, remove list style, adjust position */
 #localData > UL > LI:nth-of-type(3):not([style="display: none;"]) {
    display: inline-flex !important;  position: absolute !important; margin-top: 22px !important; }
-/* 'Last backup' and 'Last restore' lines: flow contents nicely, remove list style, adjust position */
+/* 'Last backup' and 'Last restore' lines: flow content nicely, remove list style, adjust position */
 #localData > UL > LI:-moz-any(:nth-of-type(2), :nth-of-type(3)) > UL > LI {
    display: flex !important; position: relative !important; margin-top: 0 !important; }
 /* create backup/restore box using DIV that contains Backup and Restore buttons */
@@ -196,7 +220,7 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
 #import { margin-left: 98px !important; }
 /* Reset button: adjust position, hide string */
 #reset { margin-top: 140px !important; margin-left: 350px !important; font-size: 0 !important; }
-/* Backup, Restore, and Reset buttons: restore sizes since previously setting font-size to 0 to hide old strings */
+/* Backup, Restore, and Reset buttons: restore sizes since set font-size to 0 to hide old strings (above) */
 :-moz-any(#export, #import, #reset)::before {
    font-size: small !important; line-height: 180% !important; padding: 10px !important; }
 /* Backup, Restore, and Reset buttons: improve strings */
@@ -204,6 +228,7 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
 #import::before { content: "Restore..."; }
 #reset::before { content: "Reset..."; }
 }
+
 
 /* uBlock Origin extension dashboard (in FF tab) 'Filters List' (previously '3rd-party filters') tab: improve usability */
 @-moz-document url("chrome://ublock0/content/3p-filters.html") {
@@ -217,16 +242,24 @@ H2 { background-color: rgb(68, 68, 68) !important; color: white !important; }
 #parseCosmeticFilters + LABEL { visibility: hidden !important; }
 #parseCosmeticFilters + LABEL::before {
    visibility: visible !important; margin-right: -15.5em !important;
-   content: "Parse and enforce all cosmetic filters (including My Filters)"; }
+   content: "Parse and enforce cosmetic filters (site-specific cosmetic filters in My Filters and all uBlock Filters lists are always enforced)"; }
+/* 'Ignore generic cosmetic filters' option: improve option text, add critical information, adjust help button position */
+#ignoreGenericCosmeticFilters + LABEL { visibility: hidden !important; }
+#ignoreGenericCosmeticFilters + LABEL::before {
+   visibility: visible !important; margin-right: -13.7em !important;
+   content: "Ignore cosmetic filters that get applied to every site (generic cosmetic filters in My Filters and all uBlock Filters lists will also not be enforced)"; }
+#ignoreGenericCosmeticFilters + LABEL + .whatisthis { margin-top: -3px !important; }
 /* number of filters installed: make more prominent */
 #listsOfBlockedHostsPrompt { margin-top: 17px !important; font-weight: bold !important; }
 /* filter groups: increase space above each group to enhance clarity */
 .groupEntry { margin-top: 10px !important; }
 /* filter groups enabled counters: make more prominent */
 .geCount { opacity: 1 !important; color: #00C000 !important; }
+/* filter item number of filters used: improve readability by increasing opacity */
+.counts.dim { opacity: 0.7 !important; }
 /* filter item information icons: enhance appearance */
-li.listEntry > a:nth-of-type(2) { opacity: 0.3 !important; font-size: 100% !important; }
-li.listEntry > a:nth-of-type(2):hover { opacity: 1 !important; }
+LI.listEntry > A:nth-of-type(2) { opacity: 0.3 !important; font-size: 100% !important; }
+LI.listEntry > A:nth-of-type(2):hover { opacity: 1 !important; }
 /* filters downloaded via http: change 'http' indicators to not look like clickable buttons */
 span.unsecure { background-color: transparent !important; border: none !important; }
 span.unsecure::before { content: "(via "; }
@@ -239,13 +272,13 @@ span.purge { border-color: rgb(150, 150, 150) !important; }
       (switching dashboard tabs without applying loses changes) */
 #buttonApply:not([disabled]) { filter: drop-shadow(0 0 8px green) !important; color: #00B000 !important; }
 /* instructions for adding custom lists: improve */
-#externalListsDiv > P:first-of-type { font-size: 0 !important; }
-#externalListsDiv > P:first-of-type::before {
+#externalListsDiv > P:first-of-type > SPAN { font-size: 0 !important; }
+#externalListsDiv > P:first-of-type > SPAN::before {
    font-size: small !important;
    content:
-      "Add URLs for custom lists below.\00A0\00A0One URL per line.\00A0\00A0Invalid URLs ignored.\00A0\00A0Prefix comments with '!'."; }
-/* custom lists entry area: increase height so all examples fit without scrolling */
-#externalLists { height: 12em !important; }
+      "Add URLs for custom lists below.\00A0\00A0One URL per line.\00A0\00A0Invalid URLs ignored.\00A0\00A0Prefix comments with '!'.\00A0"; }
+/* custom lists entry area: move up, reduce height */
+#externalLists { margin-top: -8px !important; height: 5em !important; }
 /* Parse button: improve by changing to an 'Add' button */
 #externalListsApply { font-size: 0 !important; }
 #externalListsApply::before {
@@ -253,18 +286,19 @@ span.purge { border-color: rgb(150, 150, 150) !important; }
    content: "\00A0\00A0\00A0 Add \00A0\00A0\00A0"; }
 }
 
+
 /* uBlock Origin extension dashboard (in FF tab) 'My Filters' tab: improve usability */
 @-moz-document url("chrome://ublock0/content/1p-filters.html") {
-/* HTML and BODY: set heights to entire viewport so child objects will have a reference height to use percentages */
+/* HTML and BODY: set heights for entire viewport so child objects will have a reference height to use percentages */
 HTML, BODY { height: 100%; }
 /* BODY: remove bottom padding to allow more room for data */
 BODY { padding-bottom: 0 !important; }
 /* heading: simplify and improve */
-/* instructions line: improve instructions and eliminate impact on vertical size of filters list
+/* instructions line: eliminate impact on vertical size of filters list by moving to bottom, improve instructions
       instead of 'font-size: 0' can alternately use 'visibility: collapse' technique */
 BODY > P:first-of-type {
    position: absolute !important; bottom: 0 !important; left: 310px !important;
-   height: 36px !important; width: -moz-calc(100% - 314px) !important;
+   height: 36px !important; width: calc(100% - 314px) !important;
    overflow: hidden !important;
    font-size: 0 !important; }
 BODY > P:first-of-type::before {
@@ -297,6 +331,7 @@ BODY > P:nth-of-type(3) {
 #exportUserFiltersToFile::before { content: "Export..."; }
 }
 
+
 /* uBlock Origin extension dashboard (in FF tab) 'My Rules' tab: improve usability */
 @-moz-document url("chrome://ublock0/content/dyna-rules.html") {
 /* description line: remove (include meaningful text in headings below) */
@@ -313,41 +348,47 @@ BODY > P:nth-of-type(2) > A::before {
    font-family: "FontAwesome" !important; font-size: medium !important; content: "\F059"; }
 /* new question mark icon on hover: emphasize */
 BODY > P:nth-of-type(2) > A:hover::before { opacity: 1 !important; }
-/* pane headings: adjust spacing, hide old strins */
+/* pane headings: adjust spacing, hide old strings */
 DIV H2 { margin-bottom: 2px !important; font-size: 0 !important; }
 /* pane headings: restore sizes since previously set font-size to 0 to hide old strings */
 DIV H2::before { font-size: large !important; }
 /* pane headings: improve strings */
 DIV.left H2::before { content: "Permanent dynamic rules"; }
 DIV.right H2::before { content: "Temporary dynamic rules"; }
+/* Edit button: increase padding to increase width so it is more prominent */
+#editEnterButton { padding-left: 24px !important; padding-right: 24px !important; }
 /* Export and Import buttons: hide old strings */
 #exportButton, #importButton { font-size: 0 !important; }
 /* Export and Import buttons: restore sizes since previously set font-size to 0 to hide old strings */
 :-moz-any(#exportButton, #importButton)::before {
-   font-size: small !important; line-height: 180% !important; padding: 10px !important; }
+   font-size: small !important; line-height: 180% !important; padding-left: 6px !important; padding-right: 6px !important; }
 /* Backup and Restore buttons: improve strings */
 #exportButton::before { content: "Export..."; }
 #importButton::before { content: "Import..."; }
 }
 
+
 /* uBlock Origin extension dashboard (in FF tab) 'My Whitelist' tab: improve usability */
 @-moz-document url("chrome://ublock0/content/whitelist.html") {
-/* set HTML and BODY heights to entire viewport so child objects will have a reference height to use percentages */
+
+/* --- BODY --- */
+/* HTML and BODY: set heights to entire viewport so child objects will have a reference height to use percentages */
 HTML, BODY { height: 100%; }
 /* BODY: remove bottom padding to allow more room for data */
 BODY { padding-bottom: 0 !important; }
-/* heading: simplify and improve */
+
+/* --- HEADING --- */
 /* instructions line: improve instructions and eliminate impact on vertical size of filters list
       instead of 'font-size: 0' can alternately use 'visibility: collapse' technique */
-   BODY > P:first-of-type {
+BODY > P:first-of-type {
    position: absolute !important; bottom: 0 !important; left: 310px !important;
-   height: 36px !important; width: -moz-calc(100% - 314px) !important;
+   height: 36px !important; width: calc(100% - 314px) !important;
    overflow: hidden !important;
    font-size: 0 !important; }
 BODY > P:first-of-type::before {
    font-size: small !important; font-style: italic !important;
    content:
-      "Blocking disabled for these hosts. One entry per line. Invalid host names ignored."; }
+      "Blocking disabled for these hosts. One host per line. Invalid hosts ignored."; }
 /* 'Apply changes' button: make much more prominent as not pressing it will result in loss of all changes
       uBlock needs a warning message when edits are made and will be lost, but not possible in CSS */
 BODY > P:nth-of-type(2) { margin: 0 !important; }
@@ -358,10 +399,14 @@ BODY > P:nth-of-type(2) { margin: 0 !important; }
 /* 'Apply changes' button: add prominent glow when a change has been made
       (switching dashboard tabs without applying loses changes) */
 #whitelistApply:not([disabled]) { filter: drop-shadow(0 0 8px green) !important; color: #00B000 !important;  }
+
+/* --- FILTERS --- */
 /* increase height of filters textarea so more filters can be displayed (requires HTML and BODY to have a defined height) */
 BODY > P:nth-of-type(3) {
    margin-top: 2px !important; margin-bottom: 2px !important; height: calc(100% - 14.9ex) !important; }
 #whitelist { height: 100% !important; }
+
+/* --- BOTTOM AREA --- */
 /* 'Import and append' and 'Export' buttons: hide old strings */
 #importWhitelistFromFile, #exportWhitelistToFile { font-size: 0 !important; }
 /* 'Import and append' and 'Export' buttons: restore sizes since previously setting font-size to 0 to hide old strings */
@@ -372,12 +417,14 @@ BODY > P:nth-of-type(3) {
 #exportWhitelistToFile::before { content: "Export..."; }
 }
 
-/* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker */
+
+/* uBlock Origin extension dashboard (in FF tab) 'About' tab: add 'Deluxe' marker and Deluxe version */
 @-moz-document url("chrome://ublock0/content/about.html") {
 /* extension name and version line: add italicized bold Deluxe marker with Enhanced UI version number */
 #aboutNameVer::after {
-   font-style: italic !important; font-weight: bolder !important; content: " Deluxe (Enhanced UI v4.4.0)"; }
+   font-style: italic !important; font-weight: bolder !important; content: " Deluxe (Enhanced UI v5.0.2)"; }
 }
+
 
 /* uBlock Origin extension request logger (in FF tab): improve usability,
       improve accessibility for persons with limited vision */
@@ -391,8 +438,8 @@ BODY > .permatoolbar { width: 100% !important; padding-bottom: 0 !important; }
 /* lower toolbars: move closer to upper toolbar and improve usability by delineating areas with borders
       for uBlock (not Origin): #toolbar > DIV:nth-of-type(2) { margin-top: -2px !important; }
       if toolbar colors are not inverted, these borders look great:
-         border-top: 1px solid #fff !important; border-right: 1px solid #ccc !important;
-            border-bottom: 1px solid #ccc !important; */
+         border-top: 1px solid #FFF !important; border-right: 1px solid #CCC !important;
+            border-bottom: 1px solid #CCC !important; */
 .inspector > .permatoolbar { margin-top: -1px !important; padding-top: 0 !important; }
 /* network and DOM inspector toolbars: improve aesthetics and allow more data to be visible */
 #netInspector > .permatoolbar { border-bottom-right-radius: 79px 56px !important; }
@@ -403,13 +450,31 @@ BODY > .permatoolbar { width: 100% !important; padding-bottom: 0 !important; }
       for uBlock (not Origin) use BODY.f instead of #netInspector.f */
 #filterInput { min-width: 16.4em !important; opacity: 0.3 !important; }
 #netInspector.f #filterButton + #filterInput { opacity: 1 !important; }
-/* filter and maximum log entries input field: change focus background color to be different from anything in log table 
+/* filter and maximum log entries input fields: change focus background color to be different from anything in log table 
       if toolbar colors are not inverted, this background looks great: background-color: hsla(180, 90%, 60%, 0.2) */
 INPUT:focus { -moz-appearance: none !important; background-color: hsl(180, 80%, 60%) !important; }
 /* maximum log entries input field: add descriptive text (::before does not work on INPUT)
       for uBlock (not Origin): #maxEntries > DIV::after { content: " entries"; } */
 #netInspector > DIV:first-of-type > DIV:first-of-type::after {
-   font-size: 80%; margin-left: -24px !important; content: "entries\00A0\00A0\00A0"; }
+   font-size: 80%; margin-left: -24px !important; content: "entries\00A0\00A0\00A0"; }  
+/* all toolbar buttons: add tooltips - first set empty transparent content */
+.permatoolbar .button::after {
+   background-color: #FFFFEE; border: 1px solid gray; border-radius: 3px;
+   box-shadow: 1px 1px 3px gray; box-sizing: border-box;
+   color: black; font: 12px sans-serif; line-height: 130%; margin: 0.5em 0; padding: 4px 6px;
+   pointer-events: none; position: absolute; text-align: center; white-space: pre-line; z-index: 100;
+   opacity: 0; content: ""; }
+/* all toolbar buttons: add tooltips - transition to opaque content */
+.permatoolbar .button:hover::after { opacity: 1; transition: opacity  0.2s 1.2s; }
+/* all toolbar buttons: add tooltips - apply actual tooltip labels to opaque content */
+#refresh:hover:after { content: "Reload page"; }
+#showdom:hover:after { content: "Toggle log/DOM view"; }
+#compactViewToggler:hover::after { content: "Toggle long entries"; }
+#clean:hover:after { content: "Remove entries for closed tabs"; }
+#clear:hover:after { content: "Clear log"; }
+#filterButton:hover::after { content: "Toggle filter"; }
+.revert:hover:after { content: "Clear proposed filters"; width: 11.5em; }
+.commit:hover:after { content: "View proposed filters"; width: 11em; }
 /* log table: ensure a discernible font (lowercase L and capital I look different) if available,
    modify font size to use a percentage to improve accessibility for persons with limited vision */
 TABLE { font-family: "Trebuchet MS", sans-serif !important; font-size: 90% !important; }
@@ -420,9 +485,14 @@ TABLE > COLGROUP > COL:nth-of-type(5) { width: 6.3em !important; }
 TR.maindoc TD:last-of-type::before { content: "ꜛ "; }
 TR.maindoc TD:last-of-type::after { content: " ꜛ"; }
 TR.maindoc TD:last-of-type { overflow: visible !important; padding-right: 8em !important; font-style: italic !important; }
+/* log table yellow rows for blocked elements: increase background opacity to improve visibility of background color */
+#netInspector TR.cb, #netInspector TR.rr { background-color: rgba(255, 255, 0, 0.2) !important; }
 /* modal overlay dialogs: add blue border */
 .modalDialog .dialog { border: 2px solid blue !important; }
+/* modal overlay dialogs: fix bug that causes long filters to extend beyond the dialog and get clipped at window edge */
+.modalDialog .dialog CODE { word-wrap: break-word !important; }
 }
+
 
 /* uBlock Origin extension blocked page notification (in FF tab): improve usability */
 @-moz-document url-prefix("chrome://ublock0/content/document-blocked.html") {
