@@ -18,9 +18,9 @@ Let me know if you are inspired to donate to a charity.
 
 *Instructions for users with Stylish:*
  - Create a new User Style called `uBlock Deluxe Chrome`.
- - Point to `userChrome.css` in this repo, or simply cut and paste the code.
+ - Point to `userChrome.css` in this repo (`https://github.com/Gitoffthelawn/uBlock-Deluxe/blob/master/userChrome.css`), or simply cut and paste the code.
  - Create a new User Style called `uBlock Deluxe Content`.
- - Point to `userContent.css` in this repo, or simply cut and paste the code.
+ - Point to `userContent.css` in this repo (`https://github.com/Gitoffthelawn/uBlock-Deluxe/blob/master/userChrome.css`), or simply cut and paste the code.
  
 *Instructions for users without Stylish:*
  - Copy userChrome.css and userContent.css into the `chrome` folder in your Firefox *profile* folder.
