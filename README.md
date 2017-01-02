@@ -16,6 +16,10 @@ If you find this project helpful and would like to make a donation, you can pick
 I am not accepting any money myself, but if my work helps any charities, that would make me happy.  
 Let me know if you are inspired to donate to a charity.
 
+One of the many user interface areas improved by uBlock Deluxe:
+
+![Screenshot of dropdown](https://github.com/Gitoffthelawn/uBlock-Deluxe/blob/master/uBlockDeluxe%20Screenshot%20-%20Dropdown.png)
+
 *Instructions for users with Stylish:*
  - Create a new User Style called `uBlock Deluxe Chrome`.
  - Point to `userChrome.css` in this repo (`https://github.com/Gitoffthelawn/uBlock-Deluxe/blob/master/userChrome.css`), or simply cut and paste the code.
