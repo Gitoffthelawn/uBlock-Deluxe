@@ -7,7 +7,7 @@ Goals: Improved usability and accessibility
 
 Designed for Mozilla Firefox
 
-Copyright (c) 2015-2016 Gitoffthelawn.  All rights reserved.  
+Copyright (c) 2015-2017 Gitoffthelawn.  All rights reserved.  
 No warranties expressed or implied.  Use at your own risk.
 
 If you are interested in this using this code or any of the resultant designs in another project, just ask by creating an issue on GitHub in this repository.
