@@ -27,7 +27,7 @@ One of the many user interface areas improved by uBlock Deluxe:
  - Point to `userContent.css` in this repo (`https://github.com/Gitoffthelawn/uBlock-Deluxe/blob/master/userContent.css`), or simply cut and paste the code.
  
 *Instructions for users without Stylish:*
- - Copy userChrome.css and userContent.css into the `chrome` folder in your Firefox *profile* folder.
+ - Copy `userChrome.css` and `userContent.css` into the `chrome` folder in your Firefox *profile* folder.
  - If the `chrome` folder does not exist, simply create one first.
  - Note that the *profile* folder is not the same as the *application* folder.
  - To find your *profile* folder, enter `about:support` into the Firefox location bar, and then click on the `Show Folder` button in the `Profile Folder` line.
