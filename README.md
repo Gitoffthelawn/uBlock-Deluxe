@@ -10,7 +10,7 @@ Designed for Mozilla Firefox
 Copyright (c) 2015-2017 Gitoffthelawn.  All rights reserved.  
 No warranties expressed or implied.  Use at your own risk.
 
-If you are interested in this using this code or any of the resultant designs in another project, just ask by creating an issue on GitHub in this repository.
+If you are interested in this using this code or any of the resultant designs in another project, just ask for permission by creating an issue on GitHub in this repository.
 
 If you find this project helpful and would like to make a donation, you can pick a charity or ask me to pick one.  
 I am not accepting any money myself, but if my work helps any charities, that would make me happy.  
